@@ -6,13 +6,15 @@ import NewPlaces from './places/pages/NewPlaces';
 
 const App = () => {
   return (
-  <Router>
-    <Switch>
+// Router is used to give the app a multi-page feel, althought it is still a SPA.
+// Switch allows us to go to different pages without us redirecting since the code gets rendered from top to bottom.
 
+<Router>
+    <Switch>
       <Route exact path="/">
         <Users />
       </Route>
-      <Route exact path="/newplaces">
+      <Route exact path="/places/new">
         <NewPlaces />
       </Route>
       <Redirect to="/"/>

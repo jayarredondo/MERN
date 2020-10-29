@@ -14,7 +14,7 @@ const UsersList = props => {
 
     return (
         //use curly braces to show hte result of a javascript expression in JSX code.
-        <ul>
+        <ul className="users-list">
             {props.items.map(user => (
                  <UserItem 
                  key={user.id} 
