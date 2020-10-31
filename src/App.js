@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 
 import Users from './users/pages/Users';
 import NewPlaces from './places/pages/NewPlaces';
+import MainNavigation from './shared/components/Navigation/MainNavigation'
 
 const App = () => {
   return (
@@ -10,15 +11,18 @@ const App = () => {
 // Switch allows us to go to different pages without us redirecting since the code gets rendered from top to bottom.
 
 <Router>
-    <Switch>
-      <Route exact path="/">
-        <Users />
-      </Route>
-      <Route exact path="/places/new">
-        <NewPlaces />
-      </Route>
-      <Redirect to="/"/>
-      </Switch>
+    <MainNavigation />
+    <main>
+      <Switch>
+        <Route exact path="/">
+          <Users />
+        </Route>
+        <Route exact path="/places/new">
+          <NewPlaces />
+        </Route>
+        <Redirect to="/"/>
+        </Switch>
+    </main>
   </Router>
   );
 }
