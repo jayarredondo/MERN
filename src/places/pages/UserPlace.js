@@ -30,10 +30,10 @@ const DUMMY_PLACES = [
     }
 ]
 
-const UserPlaces = () => {
+const UserPlace = () => {
     const userId = useParams().userId;
     const loadedPlaces = DUMMY_PLACES.filter(place => place.creator === userId)
     return <PlaceList items={loadedPlaces} />
 };
 
-export default UserPlaces;
+export default UserPlace;
