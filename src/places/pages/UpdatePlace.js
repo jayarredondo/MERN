@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 
 
@@ -37,12 +37,27 @@ const DUMMY_PLACES = [
 ]
 
 const UpdatePlace = () => {
+    const [isLoading, setIsLoading] = useState(true)
+
     const placeId = useParams().placeId;
+
+
+    const [formState, inputHandler, setFormData] = useForm({
+        title: {
+            value: '',
+            isValid: false
+        },
+        description: {
+            value: '',
+            isValid: false
+        }
+    }, false);
 
     const identifiedPlace = DUMMY_PLACES.find(p => p.id === placeId);
 
-    const [formState, inputHandler] = useForm({
-        title: {
+    useEffect(() => {
+        setFormData({        
+            title: {
             value: identifiedPlace.title,
             isValid: true
         },
@@ -50,7 +65,10 @@ const UpdatePlace = () => {
             value: identifiedPlace.description,
             isValid: true
         }
-    }, true);
+    }, true)
+    setIsLoading(false);
+    }, [setFormData, identifiedPlace]);
+
 
     const placeUpdateSubmitHandler = event => {
         event.preventDefault();
@@ -65,13 +83,22 @@ const UpdatePlace = () => {
         )
     }
 
-    return <form className="place-form" onSubmit={placeUpdateSubmitHandler}>
+    if(isLoading) {
+        return (
+            <div className='centerß'>
+                <h2>Loading...</h2>
+            </div>
+        )
+    }
+
+    return (
+    <form className="place-form" onSubmit={placeUpdateSubmitHandler}>
         <Input 
         id='title' 
         element='input' 
         type='text' 
         label='Title' 
-        validators={VALIDATOR_REQUIRE()} 
+        validators={[VALIDATOR_REQUIRE()]} 
         errorText='Please enter a valid title.' 
         onInput={inputHandler} 
         initialValue={formState.inputs.title.value} 
@@ -80,7 +107,7 @@ const UpdatePlace = () => {
         id='description' 
         element='textarea' 
         label='Description' 
-        validators={VALIDATOR_MINLENGTH(5)} 
+        validators={[VALIDATOR_MINLENGTH(5)]} 
         errorText='Please enter a valid description at least 5 characters long.' 
         onInput={inputHandler} 
         initialValue={formState.inputs.description.value} 
@@ -89,6 +116,6 @@ const UpdatePlace = () => {
             UPDATE PLACE
         </Button>
     </form>
-};
+    )};
 
 export default UpdatePlace;
