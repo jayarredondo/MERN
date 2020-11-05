@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 
+import UpdatePlace from './places/pages/UpdatePlace';
 import Users from './users/pages/Users';
 import NewPlace from './places/pages/NewPlace';
 import UserPlace from './places/pages/UserPlace';
@@ -23,6 +24,9 @@ const App = () => {
         </Route>
         <Route exact path="/places/new">
           <NewPlace />
+        </Route>
+        <Route exact path="/places/:placeId">
+          <UpdatePlace />
         </Route>
         <Redirect to="/"/>
         </Switch>
