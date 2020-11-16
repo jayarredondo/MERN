@@ -9,6 +9,8 @@ import MainNavigation from './shared/components/Navigation/MainNavigation'
 import Auth from './users/pages/Auth';
 import {AuthContext} from './shared/context/auth-context';
 
+const dotenv = require('dotenv');
+
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
