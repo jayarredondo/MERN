@@ -7,19 +7,22 @@ import NewPlace from './places/pages/NewPlace';
 import UserPlace from './places/pages/UserPlaces';
 import MainNavigation from './shared/components/Navigation/MainNavigation'
 import Auth from './users/pages/Auth';
-import {AuthContext} from './shared/context/auth-context';
+import { AuthContext } from './shared/context/auth-context';
 
 const dotenv = require('dotenv');
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(false); 
 
-  const login = useCallback(() => {
+  const login = useCallback((uid) => {
     setIsLoggedIn(true);
+    setUserId(uid);
   }, []);
 
   const logout = useCallback(() => {
     setIsLoggedIn(false);
+    setUserId(null);
   }, []);
 
   let routes;
@@ -64,7 +67,7 @@ const App = () => {
   return (
 // Router is used to give the app a multi-page feel, althought it is still a SPA.
 // Switch allows us to go to different pages without us redirecting since the code gets rendered from top to bottom.
-    <AuthContext.Provider value={{isLoggedIn: isLoggedIn, login: login, logout: logout}}>
+    <AuthContext.Provider value={{isLoggedIn: isLoggedIn, userId: userId, login: login, logout: logout}}>
       <Router>
         <MainNavigation />
         <main>
