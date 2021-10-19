@@ -1,4 +1,5 @@
 import React, {useContext} from 'react';
+import { useHistory } from 'react-router-dom'
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from '../../shared/context/auth-context';
@@ -34,6 +35,8 @@ const NewPlace = () => {
         false
     );
 
+    const history = useHistory();
+
     const placeSubmitHandler = async event => {
         event.preventDefault();
         console.log(formState.inputs); // send this to the backend
@@ -47,6 +50,7 @@ const NewPlace = () => {
             { 'Content-Type': 'application/json' }
             );
             //Redirect user to a different page.
+            history.push('/');
         } catch (err) {
 
         }
